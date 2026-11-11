@@ -1,49 +1,59 @@
-# Video Background Rain Creator
+# Python Python Game
 
 ## Repository
 https://github.com/CalvinVan/PFDA2305_Final_Project
 
 ## Description
 1-2 sentence description of what it will do and how it relevant to media and digital arts.
-The following project should turn a still image into a video / gif of a background with animated trails based on 1 - 3 colors of the image. User's should be able to also choose between 3 pattern types of rain, spirals, and zig-zags. 
 
-It is relevant to media / digital arts by transforming a still image and giving it more life and chaaracter by adding in motion through rain/trail effects using the colors of the image. 
+The project will be a recreation of the game snake using pygame. It will have a customization screen at the beginning allowing the user to select how fast they want their snake to be (slow, normal, fast, fastest) and the map setting the game is played on.
+
+It is relevant to digital arts as it is a recreation / spin on a popular original video game.
+
 
 ## Features
 - Feature 1
-	- User should be able to import / place an image inside a designated folder. The program should then use said image to create a gif of the background with trail particles to give the image life.
+    Implement a snake-like game where the goal would be to reach a certain length rather than the entire board to show completion. Player controls a character that is constantly moving aiming to eat targets that grant points and increase length of the snake making it harder to traverse
+
 - Feature 2
-	- Users should be prompted at the beginning of executing the program on what sort of particle pattern is wanted by the user (rain, zig-zag, or spiral) and the program should implement said pattern in the image
+    Implement a start screen that lets the user pre-choose the speed of their snake and want map option they may want to play on (space, jungle, or city for example )
+
 - Feature 3
-	- Users should also be prompted to input how many colors they want to see exhibited by the particle (1-3) and the program should then use said colors.
+    Implement a highscore page that shows the fastest time for a user to complete the game depending on the speed they selected.
+
 
 ## Challenges
-- Figuring out how to make a spiral pattern trail
-- Investigate if pillow or some python library has functionality to figure out the major colors of a pattern and store it as an rgb to be used for the spirals
-- Figure out how to make the pattern trails come from multiple directions possibly instead of just from the top.
+- Figure out more about Pygame and how the game loop can implement a snake game
+- Figure out how to do a customization screen to set the game
+- How to implement art within the game using pygame 
+- How to spawn in the targets randomly on the board that is a space not occupied by the player
+- How to end the game when a player has hit the edge or itself.
+- How to implement a player character that is constantly moving and keep track of all of the parts of the snake on the board while updating them. 
+
 
 ## Outcomes
 Ideal Outcome:
-- The ideal outcome is that the user can give a photo in a folder and give input on the spiral pattern and number of colors in which the program should then generate a ~5 second gif
-of the animated background.
+    Ideally the game is complete with the pre-customization screen that correctly sets the game's difficulty and map while having the snake-like game run correctly.
 
 Minimal Viable Outcome:
-- The minimal viable outcome is that at the very least that the program is able to create a gif of an image of their choosing and at least 1 trail type (whether it be rain, zig-zag, or spiral) is implemented.
+    The minimum viable outcome would the ability to play the snake-like game and have a win condition while storing the player's score in the leaderboard if possible.
+
 
 ## Milestones
 
 - Week 1
-  1. Setup structure for the repository
-  2. Setup skeleton code for the project and what initial classes / functions will be needed for the project 
-  3. Setup basic file opening structure.
-  4. Figure out which libraries / imports will be needed for the project
+    1. Setup the repository hierarchy / files needed for project
+    2. Setup skeleton code for the projects (what initial classes and functions may be needed)
+    3. Setup basic game loop in main game file
+    4. Start programming the game loop of a moving snake and targets
 
 - Week 2
-  1. Implement the video saving feature with a still image first
-  2. Implement a basic rain pattern
-  3. Implement the number of colors for the image
-  4. Implement a zig zag pattern
+    1. Continue working on implementing snake and target logic if incomplete
+    1. Work on customization screen setup to select speed and map types
+    3. Implement different target sprites/art depending on map types
 
 - Week N (Final)
-  1. Implement the spiral pattern for the image
-  2. Create a demo video of the completed project
+    1. Continue working on customization screen setup if unfinished
+    2. Work on implementing a timer and highscore page/board
+    3. Record demo of the completed game
+    
