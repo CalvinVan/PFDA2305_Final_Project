@@ -5,6 +5,14 @@ Users should be able to launch the game using python ./main.py when in the folde
 """
 import pygame
 
+class Python:
+    def __init__(self):
+        pass
+
+class Target:
+    def __init__(self):
+        pass
+
 
 if __name__ == "__main__":
     print("test")
