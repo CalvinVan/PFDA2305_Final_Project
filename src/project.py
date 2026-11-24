@@ -48,10 +48,14 @@ class Python:
 
     #Function for updating the x and y based on our direction property
     def move(self):
-        dx, dy = self.directions
+        dx, dy = self.direction
         self.x += dx
         self.y += dy
-    
+
+    def draw(self, surface):
+        #get size of character
+        rect = pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
+        pygame.draw.rect(surface, self.color, rect)
 
 class Target:
     def __init__(self):
@@ -70,6 +74,10 @@ if __name__ == "__main__":
 
     clock = pygame.time.Clock()
 
+    #spawn position start in middle
+    player = Python(x = default_res[0] // CELL_SIZE // 2,
+                    y = default_res[0] // CELL_SIZE // 2,
+                    size = CELL_SIZE)
 
     running = True
 
@@ -77,6 +85,19 @@ if __name__ == "__main__":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.KEYDOWN: #check for keypress
+                player.key_movement(event.key)
+
+        #Update the player position
+        player.move()
+
+        #Now draw it based on the now updated movement
+        #eventually we want a clock update for later
+        screen.fill((0,0,0)) 
+        player.draw(screen) #draw player on the screen surface
+        pygame.display.flip() #show the new screen drawn behind scene
+
+        clock.tick(GAME_SPEED)
 
         #TODO: Maybe here later I can have inital game setup for screen on first loop
 
