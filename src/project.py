@@ -169,6 +169,7 @@ if __name__ == "__main__":
 
         #check for when a player and target match x and y and need to remove
         if (player.x, player.y) == (target.x, target.y):
+            player.grow()
             target.respawn(player)
     
 
