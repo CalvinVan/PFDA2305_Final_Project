@@ -4,6 +4,7 @@ This is the main file that will be executed to run the game
 Users should be able to launch the game using python ./main.py when in the folder to launch game
 """
 import pygame
+import random
 
 #Some notes: It will be easier to think of the game as cells which are groups of pixels for movement reasons 
 CELL_SIZE = 20
@@ -58,8 +59,21 @@ class Python:
         pygame.draw.rect(surface, self.color, rect)
 
 class Target:
-    def __init__(self):
-        pass
+    """
+    Some notes:
+    A target will need an x,y position, size (cell), color, and where it can spawn (if we are using cells that means you can image there are rows and columns)
+    
+    As for functions, for now we will handle respawn and drawing it 
+    """
+    def __init__(self, size, cols, rows):
+        self.size = size,
+        self.x = 0 #So for x and y, this will basically be determined by which row and column it is if we imagine the game to be a grid
+        self.y = 0
+        self.rows = rows
+        self.cols = cols
+        self.color = (200,0,0)
+
+    
 
 
 if __name__ == "__main__":
