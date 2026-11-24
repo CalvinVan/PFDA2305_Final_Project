@@ -73,6 +73,18 @@ class Target:
         self.cols = cols
         self.color = (200,0,0)
 
+    def respawn(self, player): #here targets will respawn at a random location that is not == to where the player is
+        while True:
+            x = random.randint(0, self.cols- 1)
+            y = random.randint(0, self.rows - 1)
+            if (x,y) != (player.x, player.y):
+                self.x, self.y = x,y
+                return
+            #so if it is == we will pick a new x and y to position it
+    
+    def draw(self, surface): #TODO at some point we want to import an asset to use instead of using a rectangle
+        rect = pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
+        pygame.draw.rect(surface, self.color.rect)
     
 
 
