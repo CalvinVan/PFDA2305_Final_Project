@@ -46,6 +46,13 @@ class Python:
         if key in directions_map:
             self.direction = directions_map[key]
 
+    #Function for updating the x and y based on our direction property
+    def move(self):
+        dx, dy = self.directions
+        self.x += dx
+        self.y += dy
+    
+
 class Target:
     def __init__(self):
         pass
