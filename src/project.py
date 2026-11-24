@@ -70,10 +70,14 @@ class Python:
 
         #Then we can check if the key press is in the dictionary to then modify the python's direction
         if key in directions_map:
-            self.direction = directions_map[key]
+            new_direction = directions_map[key]
+            dx, dy = self.direction
+            if new_direction != (-dx, -dy):
+                self.next_direction = new_direction
 
     #Function for updating the x and y based on our direction property
     def move(self):
+        self.direction = self.next_direction
         dx, dy = self.direction
         self.x += dx
         self.y += dy
