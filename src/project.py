@@ -26,6 +26,26 @@ class Python:
         self.direction = (1,0)
         self.color = (0, 200, 0)
 
+    """
+    What are some functions needed for the game / pygame?
+    1. We will need a function to handle moving the character using pygame event handles
+    2. We will need a function to draw the character for pygame reasons
+    3. We will need a function to modify the x and y using direction and game speed
+    """
+
+    def key_movement(self,key):
+        #Can use a dictionary to store the key event and the direction associated with it
+        directions_map = {
+            pygame.K_UP: (0,-1),
+            pygame.K_DOWN: (0,1),
+            pygame.K_LEFT: (-1,0),
+            pygame.K_RIGHT: (1,0)
+        }
+
+        #Then we can check if the key press is in the dictionary to then modify the python's direction
+        if key in directions_map:
+            self.direction = directions_map[key]
+
 class Target:
     def __init__(self):
         pass
