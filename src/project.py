@@ -66,7 +66,7 @@ class Target:
     As for functions, for now we will handle respawn and drawing it 
     """
     def __init__(self, size, cols, rows):
-        self.size = size,
+        self.size = size
         self.x = 0 #So for x and y, this will basically be determined by which row and column it is if we imagine the game to be a grid
         self.y = 0
         self.rows = rows
@@ -84,7 +84,7 @@ class Target:
     
     def draw(self, surface): #TODO at some point we want to import an asset to use instead of using a rectangle
         rect = pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
-        pygame.draw.rect(surface, self.color.rect)
+        pygame.draw.rect(surface, self.color, rect)
     
 
 
@@ -100,10 +100,19 @@ if __name__ == "__main__":
 
     clock = pygame.time.Clock()
 
+    #Now here we will make screen a grid
+    grid_cols = default_res[0] // CELL_SIZE
+    grid_rows = default_res[1] // CELL_SIZE
+
     #spawn position start in middle
-    player = Python(x = default_res[0] // CELL_SIZE // 2,
-                    y = default_res[0] // CELL_SIZE // 2,
+    player = Python(x = grid_cols // 2,
+                    y = grid_rows // 2,
                     size = CELL_SIZE)
+
+    #place our first target before looping
+
+    target = Target(CELL_SIZE, grid_cols, grid_rows)
+    target.respawn(player)
 
     running = True
 
@@ -117,9 +126,16 @@ if __name__ == "__main__":
         #Update the player position
         player.move()
 
+
+        #check for when a player and target match x and y and need to remove
+        if (player.x, player.y) == (target.x, target.y):
+            target.respawn(player)
+    
+
         #Now draw it based on the now updated movement
         #eventually we want a clock update for later
         screen.fill((0,0,0)) 
+        target.draw(screen) #draw target on screen too
         player.draw(screen) #draw player on the screen surface
         pygame.display.flip() #show the new screen drawn behind scene
 
