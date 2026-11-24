@@ -45,9 +45,10 @@ class Python:
         self.y = y
         self.size = size
         self.direction = (1,0)
+        self.next_direction = (1,0) #variable to q next move. Serves as a check to prevent user from moving in opposite direction into itself.
         self.color = (0, 200, 0)
 
-        self.body = deque([(x,y)]) #initialize the body deque which will hold coordinates for all of the python's segments.
+        self.body = deque([(x,y), (x-1,y), (x-2,y)]) #initialize the body deque which will hold coordinates for all of the python's segments.
         self.growing_num = 0 #so depending on how many targets we are eating before the update happens, we want to keep track of how many we need to add
 
 
