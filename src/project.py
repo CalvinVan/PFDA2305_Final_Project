@@ -15,6 +15,27 @@ class Target:
 
 
 if __name__ == "__main__":
-    print("test")
+    #Basic Init for pygame
+    pygame.init()
+    pygame.display.set_caption("Python Python Game")
+
+
+    #Screen Setup
+    default_res = (800,600)
+    screen = pygame.display.set_mode(default_res)
+
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        #TODO: Maybe here later I can have inital game setup for screen on first loop
+
+        
+    
+    pygame.quit()
+
 
     
