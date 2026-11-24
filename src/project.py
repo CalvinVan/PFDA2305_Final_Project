@@ -28,7 +28,17 @@ class Python:
         python since we can add left and pop right.
 
         So with this implementation, as the snake moves, we can add components to the left side
-        and pop out from the right for older pieces being written off.  
+        and pop out from the right for older pieces being written off. 
+
+        Some more thoughts.
+        If we think of a long python moving in the game, there are only really 2 things
+        constantly updating, the head and the tail. So as the snake moves, it essentially needs to keep track of kind of 3 things.
+        1. Where will the new head be located.
+        2. The tail will need to be popped for every move essentially because the middle is "not moving"
+            *which is why the deque is helpful because when we pop out the old tail, we know where the new tail is (at the end of our list)
+        3. We will also need to think of when our snake grows. If our snake grows, we add in a new tail which essentially would
+        prevent a pop.
+         
     """
     def __init__(self, x, y, size):
         self.x = x
@@ -36,6 +46,9 @@ class Python:
         self.size = size
         self.direction = (1,0)
         self.color = (0, 200, 0)
+
+        self.body = deque([(x,y)]) #initialize the body deque which will hold coordinates for all of the python's segments.
+        
 
     """
     What are some functions needed for the game / pygame?
@@ -62,6 +75,8 @@ class Python:
         dx, dy = self.direction
         self.x += dx
         self.y += dy
+
+
 
     def draw(self, surface):
         #get size of character
