@@ -117,7 +117,7 @@ class Target:
         while True:
             x = random.randint(0, self.cols- 1)
             y = random.randint(0, self.rows - 1)
-            if (x,y) != (player.x, player.y):
+            if (x,y) not in player.body:
                 self.x, self.y = x,y
                 return
             #so if it is == we will pick a new x and y to position it
