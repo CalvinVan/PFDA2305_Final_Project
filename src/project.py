@@ -5,9 +5,11 @@ Users should be able to launch the game using python ./main.py when in the folde
 """
 import pygame
 import random
+from collections import deque
+
 
 #Some notes: It will be easier to think of the game as cells which are groups of pixels for movement reasons 
-CELL_SIZE = 20
+CELL_SIZE = 60
 GAME_SPEED = 10 #TODO: Modify later with custom settings to have game speed change
 
 
@@ -18,7 +20,15 @@ class Python:
     1. the position of our player on the board using x and y
     2. The size of our python (Later we will need to address length)
     3. the direction of our character. with drawing direcition we have +/- x and +/- y to do n,s,w,e
-    4. Just a color of our character that we will draw  
+    4. Just a color of our character that we will draw
+
+        Intuition:
+        Kind of like with rain, we can use an array structure to keep track of all the coordinates
+        of our python's segements. However, we can utilize a deque to have a better control of the head / tail of the
+        python since we can add left and pop right.
+
+        So with this implementation, as the snake moves, we can add components to the left side
+        and pop out from the right for older pieces being written off.  
     """
     def __init__(self, x, y, size):
         self.x = x
