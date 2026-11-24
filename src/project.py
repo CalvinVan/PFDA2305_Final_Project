@@ -38,7 +38,7 @@ class Python:
             *which is why the deque is helpful because when we pop out the old tail, we know where the new tail is (at the end of our list)
         3. We will also need to think of when our snake grows. If our snake grows, we add in a new tail which essentially would
         prevent a pop.
-         
+
     """
     def __init__(self, x, y, size):
         self.x = x
@@ -48,7 +48,8 @@ class Python:
         self.color = (0, 200, 0)
 
         self.body = deque([(x,y)]) #initialize the body deque which will hold coordinates for all of the python's segments.
-        
+        self.growing_num = 0 #so depending on how many targets we are eating before the update happens, we want to keep track of how many we need to add
+
 
     """
     What are some functions needed for the game / pygame?
@@ -76,12 +77,26 @@ class Python:
         self.x += dx
         self.y += dy
 
+        self.body.appendleft((self.x, self.y)) #we need to add in our new head
+
+        #we will then need to pop out the tail unless we have any growing counters we need to address from eating a target
+        if self.growing_num > 0:
+            self.growing_num -= 1
+        else:
+            self.body.pop() #if we don't have any additions, we will pop out the tail.
+
+    #Helper function to let python know when we eat a target
+    def grow(self):
+        self.growing_num += 1
+
+
 
 
     def draw(self, surface):
-        #get size of character
-        rect = pygame.Rect(self.x * self.size, self.y * self.size, self.size, self.size)
-        pygame.draw.rect(surface, self.color, rect)
+        #Now we will need to draw for every entry in the body
+        for (x,y) in self.body:
+            rect = pygame.Rect(x * self.size, y * self.size, self.size, self.size)
+            pygame.draw.rect(surface, self.color, rect)
 
 class Target:
     """
