@@ -9,7 +9,7 @@ from collections import deque
 
 
 #Some notes: It will be easier to think of the game as cells which are groups of pixels for movement reasons 
-CELL_SIZE = 60
+CELL_SIZE = 40
 GAME_SPEED = 10 #TODO: Modify later with custom settings to have game speed change
 
 
@@ -95,6 +95,13 @@ class Python:
         self.growing_num += 1
 
 
+    #Hit condtionals
+    def hit_self(self): 
+        #Check if there are 2 instances of the same coords, that means we have collided with ourselves
+        return self.body.count((self.x, self.y)) > 1
+        
+    def hit_wall(self, grid_cols, grid_rows):
+        return self.x <= 0 or self.x >= grid_cols - 1 or self.y <= 0 or self.y >= grid_rows - 1
 
 
     def draw(self, surface):
@@ -120,8 +127,8 @@ class Target:
 
     def respawn(self, player): #here targets will respawn at a random location that is not == to where the player is
         while True:
-            x = random.randint(0, self.cols- 1)
-            y = random.randint(0, self.rows - 1)
+            x = random.randint(1, self.cols - 2)
+            y = random.randint(1, self.rows - 2)
             if (x,y) not in player.body:
                 self.x, self.y = x,y
                 return
@@ -142,6 +149,15 @@ def new_game(grid_cols, grid_rows):
     target = Target(CELL_SIZE, grid_cols, grid_rows)
     target.respawn(player)
     return player, target
+
+def draw_walls(surface, grid_cols, grid_rows):
+    color = (0, 0, 255)
+    width, height = grid_cols * CELL_SIZE, grid_rows * CELL_SIZE
+    pygame.draw.rect(surface, color, (0,0,width,CELL_SIZE))
+    pygame.draw.rect(surface, color, (0,height-CELL_SIZE,width,CELL_SIZE))
+    pygame.draw.rect(surface, color, (0,0,CELL_SIZE, height))
+    pygame.draw.rect(surface, color, (width-CELL_SIZE,0,CELL_SIZE,height))
+
 
 if __name__ == "__main__":
     #Basic Init for pygame
@@ -228,7 +244,8 @@ if __name__ == "__main__":
             if (player.x, player.y) == (target.x, target.y):
                 player.grow()
                 target.respawn(player)
-    
+
+            draw_walls(screen, grid_cols,grid_rows)
             target.draw(screen) #draw target on screen too
             player.draw(screen) #draw player on the screen surface
         pygame.display.flip() #show the new screen drawn behind scene
