@@ -149,6 +149,17 @@ if __name__ == "__main__":
     grid_cols = default_res[0] // CELL_SIZE
     grid_rows = default_res[1] // CELL_SIZE
 
+    #Initialize startup screen
+    title_font = pygame.font.Font(None, 72)
+    button_font = pygame.font.Font(None,40)
+
+
+    #Create start button
+    start_button = pygame.Rect(0,0, 200, 50)
+    start_button.center = (default_res[0]//2, default_res[1]//2 + 50) #set position of button center pivot
+
+    """
+    #The stuff below handles the game so it will be moved later to its own function for game startup
     #spawn position start in middle
     player = Python(x = grid_cols // 2,
                     y = grid_rows // 2,
@@ -158,6 +169,16 @@ if __name__ == "__main__":
 
     target = Target(CELL_SIZE, grid_cols, grid_rows)
     target.respawn(player)
+    ## Move above
+    """
+
+    #now we need a state for start screen and playing essentially
+    state = "menu"
+
+    #Setting to none because game loop checks for some player and target where the initalization is moved to a function
+    player = None
+    target = None
+
 
     running = True
 
@@ -165,8 +186,19 @@ if __name__ == "__main__":
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.KEYDOWN: #check for keypress
-                player.key_movement(event.key)
+
+            elif state == "menu":
+                #logic to start game
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    if start_button.collidepoint(event.pos): #so here we check if the click matches the collision of the button
+                        #TODO here we initalize game uncomment once helper function is made
+                        #player, target = new_game(grid_cols, grid_rows)
+                        #state = "playing"
+                        print("test")
+        
+            elif state == "playing":
+                if event.type == pygame.KEYDOWN: #check for keypress
+                    player.key_movement(event.key)
 
         #Update the player position
         player.move()
