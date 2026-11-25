@@ -200,21 +200,35 @@ if __name__ == "__main__":
                 if event.type == pygame.KEYDOWN: #check for keypress
                     player.key_movement(event.key)
 
-        #Update the player position
-        player.move()
+
+                
+        # UPDATE AND DRAWING SECTION
+
+        #MENU SECTION
+        screen.fill((0,0,0))
+
+        if state == "menu":
+            title = title_font.render("Python Python Game", True, (0,200,0))
+            screen.blit(title, title.get_rect(center=(default_res[0]//2, default_res[1]//2-50)))
+
+            pygame.draw.rect(screen, (0,180,0), start_button, border_radius=8)
+
+            label = button_font.render("Start Game", True, (255,255,255))
+            screen.blit(label, label.get_rect(center=start_button.center))
 
 
-        #check for when a player and target match x and y and need to remove
-        if (player.x, player.y) == (target.x, target.y):
-            player.grow()
-            target.respawn(player)
+        elif state == "playing":
+            #Update the player position
+            player.move()
+
+
+            #check for when a player and target match x and y and need to remove
+            if (player.x, player.y) == (target.x, target.y):
+                player.grow()
+                target.respawn(player)
     
-
-        #Now draw it based on the now updated movement
-        #eventually we want a clock update for later
-        screen.fill((0,0,0)) 
-        target.draw(screen) #draw target on screen too
-        player.draw(screen) #draw player on the screen surface
+            target.draw(screen) #draw target on screen too
+            player.draw(screen) #draw player on the screen surface
         pygame.display.flip() #show the new screen drawn behind scene
 
         clock.tick(GAME_SPEED)
