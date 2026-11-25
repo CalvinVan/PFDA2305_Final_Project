@@ -132,6 +132,16 @@ class Target:
         pygame.draw.rect(surface, self.color, rect)
     
 
+def new_game(grid_cols, grid_rows):
+    player = Python(x = grid_cols // 2,
+                    y = grid_rows // 2,
+                    size = CELL_SIZE)
+
+    #place our first target before looping
+
+    target = Target(CELL_SIZE, grid_cols, grid_rows)
+    target.respawn(player)
+    return player, target
 
 if __name__ == "__main__":
     #Basic Init for pygame
@@ -161,14 +171,7 @@ if __name__ == "__main__":
     """
     #The stuff below handles the game so it will be moved later to its own function for game startup
     #spawn position start in middle
-    player = Python(x = grid_cols // 2,
-                    y = grid_rows // 2,
-                    size = CELL_SIZE)
-
-    #place our first target before looping
-
-    target = Target(CELL_SIZE, grid_cols, grid_rows)
-    target.respawn(player)
+    
     ## Move above
     """
 
@@ -191,10 +194,9 @@ if __name__ == "__main__":
                 #logic to start game
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     if start_button.collidepoint(event.pos): #so here we check if the click matches the collision of the button
-                        #TODO here we initalize game uncomment once helper function is made
-                        #player, target = new_game(grid_cols, grid_rows)
-                        #state = "playing"
-                        print("test")
+                        player, target = new_game(grid_cols, grid_rows)
+                        state = "playing"
+                        
         
             elif state == "playing":
                 if event.type == pygame.KEYDOWN: #check for keypress
